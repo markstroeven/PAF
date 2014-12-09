@@ -1,11 +1,13 @@
 package patternManagement;
 
+import java.awt.Image;
+
 public class Diagram {
-	private String name, imagePath;
+	private String name;
+	private Image image;
 	
-	Diagram(String nm, String ip){
+	public Diagram(String nm){
 		setName(nm);
-		setImagePath(ip);
 	}
 
 	public String getName() {
@@ -16,11 +18,14 @@ public class Diagram {
 		this.name = name;
 	}
 
-	public String getImagePath() {
-		return imagePath;
+	public Image getImage() {
+		return image;
 	}
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setImage(Image image) {
+		this.image = image;
 	}
+
+	
+	
 }

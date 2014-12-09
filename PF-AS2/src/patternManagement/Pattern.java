@@ -1,7 +1,10 @@
 package patternManagement;
+
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
+import observer.PatternObserver;
 
 public class Pattern {
 	private String name, description;
@@ -10,13 +13,15 @@ public class Pattern {
 	private List<Consequence> theConsequence = new ArrayList<Consequence>();
 	private List<Solution> theSolution = new ArrayList<Solution>();
 	private List<Problem> theProblem = new ArrayList<Problem>();
-	private List<Diagram> theDiagram = new ArrayList<Diagram>();
+	private Diagram theDiagram;
 	private Force force;
-	
-	public Pattern(Force fc, String nm, String d){
+	private PatternObserver observer;
+
+	public Pattern(Force fc, String nm, String d, PatternObserver pob) {
 		setForce(fc);
 		setName(nm);
 		setDescription(d);
+		observer = pob;
 	}
 
 	public String getName() {
@@ -75,13 +80,10 @@ public class Pattern {
 		this.theProblem = theProblem;
 	}
 
-	public List<Diagram> getTheDiagram() {
+	public Diagram getTheDiagram() {
 		return theDiagram;
 	}
 
-	public void setTheDiagram(List<Diagram> theDiagram) {
-		this.theDiagram = theDiagram;
-	}
 
 	public Force getForce() {
 		return force;
@@ -90,8 +92,47 @@ public class Pattern {
 	public void setForce(Force fc) {
 		force = fc;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return name;
 	}
+
+	public void addConsequence(Consequence c) {
+		theConsequence.add(c);
+		observer.alertMembers();
+	}
+
+	public void addProblem(Problem p) {
+		theProblem.add(p);
+		observer.alertMembers();
+	}
+
+	public void addSolution(Solution s) {
+		theSolution.add(s);
+		observer.alertMembers();
+	}
+
+	public void addDiagram(String nm, Image i) {
+
+		Diagram d = new Diagram(nm);
+		d.setImage(i);
+		theDiagram = (d);
+		observer.alertMembers();
+		System.out.println("SAHBIE alles is gedaan");
+
+	}
+
+	public void addParticipant(Participant p) {
+
+		theParticipant.add(p);
+		observer.alertMembers();
+
+	}
+	
+	
+	public String totring(){
+		return name;
+	}
+	
+
 }

@@ -1,5 +1,5 @@
-/Main.class
-/contextManagement
-/ioManagement
-/patternManagement
-/userInterface
+/userInterface/
+/contextManagement/
+/patternManagement/
+/observer.class
+/observer/

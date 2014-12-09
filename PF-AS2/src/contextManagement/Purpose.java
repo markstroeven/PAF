@@ -1,5 +1,9 @@
 package contextManagement;
 
+import java.util.List;
+
+import patternManagement.Pattern;
+
 
 public class Purpose extends ContextClassification{
 	
@@ -11,4 +15,5 @@ public class Purpose extends ContextClassification{
 	public void addContextCategory(ContextCategory c){
 		super.getTheCategory().add(c);
 	}
+
 }

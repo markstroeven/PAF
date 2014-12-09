@@ -8,7 +8,7 @@ public class Participant {
 	private List<String> superType = new ArrayList<String>();
 	private List<String> method = new ArrayList<String>();
 	
-	Participant(String nm, String d){
+	public Participant(String nm, String d){
 		name = nm;
 		description = d;
 	}

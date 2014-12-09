@@ -11,8 +11,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import observer.PatternObserver;
 import patternManagement.Force;
 import patternManagement.Pattern;
+import userInterface.MainFrame;
 import contextManagement.ContextCategory;
 import contextManagement.ContextClassification;
 
@@ -20,10 +22,11 @@ public class AddPatternWindow extends JPanel {
 
 	final JComboBox<ContextCategory> combo = new JComboBox<ContextCategory>();
 	final ContextClassification p, s;
+	private MainFrame frameLink;
 
 	public AddPatternWindow(ContextClassification purpose,
-			ContextClassification scope) {
-
+			ContextClassification scope, MainFrame mf) {
+		frameLink = mf;
 		p = purpose;
 		s = scope;
 
@@ -76,7 +79,9 @@ public class AddPatternWindow extends JPanel {
 				} else {
 
 					selected.addPattern(new Pattern(new Force(),
-							name.getText(), description.getText()));
+							name.getText(), description.getText(), new PatternObserver(frameLink)));
+					
+
 				}
 
 			}

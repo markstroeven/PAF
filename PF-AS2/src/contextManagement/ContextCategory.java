@@ -11,7 +11,7 @@ public class ContextCategory implements AbstractContextCategory {
 	private ContextObserver observer;
 
 	public Pattern searchPattern(String nm) {
-		
+
 		Pattern searched = null;
 
 		for (Pattern p : thePattern) {
@@ -23,7 +23,7 @@ public class ContextCategory implements AbstractContextCategory {
 		return searched;
 	}
 
-	public ContextCategory(String nm, ContextObserver o ) {
+	public ContextCategory(String nm, ContextObserver o) {
 		observer = o;
 		setName(nm);
 	}
@@ -44,11 +44,15 @@ public class ContextCategory implements AbstractContextCategory {
 		this.thePattern = thePattern;
 	}
 
+	public List<Pattern> getPatterns() {
+		return thePattern;
+	}
+
 	public String toString() {
 		return name;
 	}
-	
-	public void addPattern(Pattern p){
+
+	public void addPattern(Pattern p) {
 		thePattern.add(p);
 		observer.alert();
 	}

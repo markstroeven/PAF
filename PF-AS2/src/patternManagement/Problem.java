@@ -3,7 +3,7 @@ package patternManagement;
 public class Problem {
 	private String name, description;
 	
-	Problem(String nm, String d){
+	public Problem(String nm, String d){
 		setName(nm);
 		setDescription(d);
 	}

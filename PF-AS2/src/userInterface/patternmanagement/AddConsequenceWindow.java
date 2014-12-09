@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import patternManagement.Consequence;
 import patternManagement.Force;
 import patternManagement.Pattern;
 import contextManagement.ContextCategory;
@@ -18,28 +19,25 @@ import contextManagement.ContextClassification;
 public class AddConsequenceWindow extends JPanel {
 
 	public JComboBox<Pattern> combo = new JComboBox<Pattern>();
-	ContextClassification p,s;
-	
+	ContextClassification p, s;
 
-	
 	public AddConsequenceWindow(ContextClassification purpose,
 			ContextClassification scope) {
-		
+
 		p = purpose;
 		s = scope;
-		
+
 		populateList();
 
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-		
-
-		JTextField name, description;
-		this.add(new JLabel("The name of the pattern"));
+		final JTextField name;
+		final JTextField description;
+		this.add(new JLabel("The name of the consequence"));
 		this.add(name = new JTextField(22));
-		this.add(new JLabel("The description of the pattern"));
+		this.add(new JLabel("The description of the consequence"));
 		this.add(description = new JTextField(22));
-		this.add(new JLabel("The category of the pattern"));
+		this.add(new JLabel("The reffered pattern"));
 		this.add(combo);
 		JButton submit;
 		this.add(submit = new JButton("Create new Pattern"));
@@ -48,24 +46,29 @@ public class AddConsequenceWindow extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				Pattern p = new Pattern(new Force(), "", "");
+				Pattern p = (Pattern) combo.getSelectedItem();
+
+				p.addConsequence(new Consequence(name.getText(), description
+						.getText()));
+
+				System.out.println("Zojuist toegevoegd: "
+						+ p.getTheConsequence().get(0).getName());
 
 			}
 		});
 
-
 		this.setSize(100, 100);
 		this.setVisible(true);
 	}
-	
-	public void populateList(){
-		for(ContextCategory c : p.getTheCategory()){
-			for(Pattern p : c.getThePattern()){
+
+	public void populateList() {
+		for (ContextCategory c : p.getTheCategory()) {
+			for (Pattern p : c.getThePattern()) {
 				combo.addItem(p);
 			}
 		}
-		for(ContextCategory c : s.getTheCategory()){
-			for(Pattern p : c.getThePattern()){
+		for (ContextCategory c : s.getTheCategory()) {
+			for (Pattern p : c.getThePattern()) {
 				combo.addItem(p);
 			}
 		}

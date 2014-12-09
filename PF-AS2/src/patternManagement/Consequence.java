@@ -3,7 +3,7 @@ package patternManagement;
 public class Consequence {
 	private String name, description;
 	
-	Consequence(String nm, String d){
+	public Consequence(String nm, String d){
 		setName(nm);
 		setDescription(d);
 	}
