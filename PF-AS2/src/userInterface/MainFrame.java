@@ -34,6 +34,8 @@ public class MainFrame extends JFrame {
 	private JMenuItem newWorkspace = new JMenuItem("New Workspace");
 
 	private ContextClassification purpose, scope;
+	
+	private PatternManFrame patternmanlink;
 
 	public MainFrame(ContextClassification s, ContextClassification p) {
 
@@ -94,7 +96,9 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				addInternalFrame(new PatternManFrame(purpose, scope));
+				 patternmanlink = new PatternManFrame(purpose, scope);
+				
+				addInternalFrame(patternmanlink);
 
 			}
 		});
@@ -106,20 +110,10 @@ public class MainFrame extends JFrame {
 		desktop.add(frame);
 	}
 
-	public ContextClassification getPurpose() {
-		return purpose;
+	public void updateAll(){
+	patternmanlink.updateAll();
 	}
-
-	public void setPurpose(ContextClassification purpose) {
-		this.purpose = purpose;
-	}
-
-	public ContextClassification getScope() {
-		return scope;
-	}
-
-	public void setScope(ContextClassification scope) {
-		this.scope = scope;
-	}
+	
+	
 
 }

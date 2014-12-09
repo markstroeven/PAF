@@ -8,9 +8,10 @@ import patternManagement.Pattern;
 public class ContextCategory implements AbstractContextCategory {
 	private String name;
 	private List<Pattern> thePattern = new ArrayList<Pattern>();
+	private ContextObserver observer;
 
 	public Pattern searchPattern(String nm) {
-
+		
 		Pattern searched = null;
 
 		for (Pattern p : thePattern) {
@@ -22,7 +23,8 @@ public class ContextCategory implements AbstractContextCategory {
 		return searched;
 	}
 
-	public ContextCategory(String nm) {
+	public ContextCategory(String nm, ContextObserver o ) {
+		observer = o;
 		setName(nm);
 	}
 
@@ -44,5 +46,10 @@ public class ContextCategory implements AbstractContextCategory {
 
 	public String toString() {
 		return name;
+	}
+	
+	public void addPattern(Pattern p){
+		thePattern.add(p);
+		observer.alert();
 	}
 }

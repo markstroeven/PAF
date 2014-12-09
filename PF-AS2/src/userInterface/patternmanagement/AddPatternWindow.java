@@ -18,18 +18,17 @@ import contextManagement.ContextClassification;
 
 public class AddPatternWindow extends JPanel {
 
+	final JComboBox<ContextCategory> combo = new JComboBox<ContextCategory>();
+	final ContextClassification p, s;
+
 	public AddPatternWindow(ContextClassification purpose,
 			ContextClassification scope) {
 
-		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		p = purpose;
+		s = scope;
 
-		final JComboBox<ContextCategory> combo = new JComboBox<ContextCategory>();
-		for (ContextCategory c : purpose.getTheCategory()) {
-			combo.addItem(c);
-		}
-		for (ContextCategory c : scope.getTheCategory()) {
-			combo.addItem(c);
-		}
+		populateList();
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 		final JTextField name;
 		final JTextField description;
@@ -75,9 +74,9 @@ public class AddPatternWindow extends JPanel {
 									"The pattern name you have entered already exists, please select a different name",
 									"ERROR", JOptionPane.ERROR_MESSAGE);
 				} else {
-					selected.getThePattern().add(
-							new Pattern(new Force(), name.getText(),
-									description.getText()));
+
+					selected.addPattern(new Pattern(new Force(),
+							name.getText(), description.getText()));
 				}
 
 			}
@@ -85,6 +84,15 @@ public class AddPatternWindow extends JPanel {
 
 		this.setSize(100, 100);
 		this.setVisible(true);
+	}
+
+	public void populateList() {
+		for (ContextCategory c : p.getTheCategory()) {
+			combo.addItem(c);
+		}
+		for (ContextCategory c : s.getTheCategory()) {
+			combo.addItem(c);
+		}
 	}
 
 }

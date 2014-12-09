@@ -17,22 +17,23 @@ import contextManagement.ContextClassification;
 
 public class AddConsequenceWindow extends JPanel {
 
+	public JComboBox<Pattern> combo = new JComboBox<Pattern>();
+	ContextClassification p,s;
+	
+
+	
 	public AddConsequenceWindow(ContextClassification purpose,
 			ContextClassification scope) {
+		
+		p = purpose;
+		s = scope;
+		
+		populateList();
 
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-		JComboBox<Pattern> combo = new JComboBox<Pattern>();
-		for(ContextCategory c : purpose.getTheCategory()){
-			for(Pattern p : c.getThePattern()){
-				combo.addItem(p);
-			}
-		}
-		for(ContextCategory c : scope.getTheCategory()){
-			for(Pattern p : c.getThePattern()){
-				combo.addItem(p);
-			}
-		}
+		
+
 		JTextField name, description;
 		this.add(new JLabel("The name of the pattern"));
 		this.add(name = new JTextField(22));
@@ -55,6 +56,19 @@ public class AddConsequenceWindow extends JPanel {
 
 		this.setSize(100, 100);
 		this.setVisible(true);
+	}
+	
+	public void populateList(){
+		for(ContextCategory c : p.getTheCategory()){
+			for(Pattern p : c.getThePattern()){
+				combo.addItem(p);
+			}
+		}
+		for(ContextCategory c : s.getTheCategory()){
+			for(Pattern p : c.getThePattern()){
+				combo.addItem(p);
+			}
+		}
 	}
 
 }
