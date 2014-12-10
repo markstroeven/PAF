@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pattern>
+
+<classification>Scope</classification>
+<category>Object</category>
+<name>Model View View Model</name>
+<description>The model view controller is designed to seperate code accordingly within a model, view regulated by a controller</description>
+<diagram-path>C:\Users\Mark\Desktop\Repository\mvvm.png</diagram-path>
+
+
+<classification>Scope</classification>
+<category>Object</category>
+<name>Model View Controller pattern</name>
+<description>The model view controller is designed to seperate code accordingly within a model, view regulated by a controller</description>
+<diagram-path>C:\Users\Mark\Desktop\Repository\mvc.jpg</diagram-path>
+
+ 
+ 
+ </pattern>
+

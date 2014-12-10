@@ -38,7 +38,7 @@ public abstract class ContextClassification {
 	
 	public abstract void addContextCategory(ContextCategory c);
 
-	public ContextCategory searchcatCategory(String nm){
+	public ContextCategory searchCategory(String nm){
 		ContextCategory searched = null;
 		for(ContextCategory c : theCategory){
 			if(c.getName().equals(nm)){

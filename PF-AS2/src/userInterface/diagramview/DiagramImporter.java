@@ -125,7 +125,8 @@ public class DiagramImporter extends JInternalFrame {
 	public void addImageTopattern() {
 
 		Pattern p = (Pattern) combo.getSelectedItem();
-		p.addDiagram(name.getText(), theCurrentImage);
-		System.out.println("SAHBIE IK GA NU DINGETJE TOEVOEGEN");
+		System.out.println("Selected -> " + p);
+		p.addDiagram(theCurrentImage);
+		
 	}
 }

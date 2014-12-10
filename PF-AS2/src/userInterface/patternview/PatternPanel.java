@@ -29,6 +29,7 @@ public class PatternPanel extends JPanel {
 	}
 
 	public void updateItem(Pattern p) {
+
 		p1.updateItem(p);
 		p2.updateItem(p);
 

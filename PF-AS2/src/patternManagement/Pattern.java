@@ -112,9 +112,9 @@ public class Pattern {
 		observer.alertMembers();
 	}
 
-	public void addDiagram(String nm, Image i) {
+	public void addDiagram(Image i) {
 
-		Diagram d = new Diagram(nm);
+		Diagram d = new Diagram();
 		d.setImage(i);
 		theDiagram = (d);
 		observer.alertMembers();
@@ -132,6 +132,10 @@ public class Pattern {
 	
 	public String totring(){
 		return name;
+	}
+	
+	public void doUpdate(){
+		observer.alertMembers();
 	}
 	
 

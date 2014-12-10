@@ -23,6 +23,8 @@ public class ContextCategory implements AbstractContextCategory {
 		return searched;
 	}
 
+	
+	
 	public ContextCategory(String nm, ContextObserver o) {
 		observer = o;
 		setName(nm);

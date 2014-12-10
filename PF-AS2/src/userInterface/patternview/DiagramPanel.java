@@ -17,11 +17,21 @@ public class DiagramPanel extends JPanel{
 		
 		
 	}
+
+	public Image getToSHow() {
+		return toSHow;
+	}
+
+	public void setToSHow(Image toSHow) {
+		this.toSHow = toSHow;
+	}
 	
 	public void updateItem(Pattern p) {
 		this.removeAll();
 		toSHow = p.getTheDiagram().getImage();
 		this.add(new JLabel(new ImageIcon(toSHow)));
 	}
+	
+	
 
 }

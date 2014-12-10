@@ -17,7 +17,7 @@ public class GPIPanel extends JPanel {
 	public GPIPanel() {
 
 		this.setVisible(true);
-		this.setLayout(new GridLayout(7, 1));
+		this.setLayout(new GridLayout(20, 1));
 		this.add(new JLabel("Pattern name:"));
 		this.add(name = new JLabel("DATA HIER"));
 		this.add(new JLabel("Pattern description:"));

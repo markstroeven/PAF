@@ -12,7 +12,7 @@ public class Main {
 		
 		//Initialization of controllers 
 		ContextClassification p = new Purpose("Purpose","[Hier komt de omschrijving]");
-		ContextClassification s = new Scope("Purpose","[Hier komt de omschrijving]");
+		ContextClassification s = new Scope("Scope","[Hier komt de omschrijving]");
 		
 		MainFrame mf11 = new MainFrame(s,p);
 		
@@ -30,6 +30,9 @@ public class Main {
 		
 		s.getTheCategory().add(byClass);
 		s.getTheCategory().add(object);
+		
+	
+		
 		
 		
 	}

@@ -1,5 +1,7 @@
 package userInterface;
 
+import ioManagement.InFrame;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,8 +10,11 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -18,23 +23,27 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import patternManagement.Pattern;
 import userInterface.diagramview.DiagramImporter;
 import userInterface.patternmanagement.PatternManFrame;
+import userInterface.patternmanagement.edit.EditFrame;
 import userInterface.patternview.PatternPanel;
 import contextManagement.ContextCategory;
 import contextManagement.ContextClassification;
 
 public class MainFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 199816998292226292L;
 	// frame components
 	private JDesktopPane desktop = new JDesktopPane();
 	private JMenuBar menu = new JMenuBar();
@@ -44,44 +53,61 @@ public class MainFrame extends JFrame {
 	private JMenu resource = new JMenu("External resources");
 	private JMenuItem newDiagramm = new JMenuItem("New diagram resource");
 
+	private JMenu io = new JMenu("Import / exort repository");
+	private JMenuItem in = new JMenuItem("Import repository");
+	private JMenuItem out = new JMenuItem("Export repository");
+
+	private JMenu search = new JMenu("Search pattern");
+	JMenuItem searchGeneral = new JMenuItem("Search pattern by category");
+	JMenuItem searchKeyword = new JMenuItem("Search pattern by keywords");
+
 	private ContextClassification purpose, scope;
 
 	private PatternManFrame patternmanlink;
 	private MainFrame mainFrameLink = this;
-	private DefaultListModel listModel;
+	private DefaultListModel<Object> listModel;
 	private PatternPanel patternPanel1;
 
 	public MainFrame(ContextClassification s, ContextClassification p) {
 
 		super("Cindy");
-
 		purpose = p;
 		scope = s;
 
 		this.setLayout(new BorderLayout());
-
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
 		newManagementView.setMnemonic(KeyEvent.VK_N);
 
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int xSize = ((int) tk.getScreenSize().getWidth());
 		int ySize = ((int) tk.getScreenSize().getHeight());
 		this.setSize(xSize, ySize);
-
 		this.setUndecorated(false);
-
 		this.setJMenuBar(menu);
 		this.menu.add(file);
 		this.file.setMnemonic('f');
 		this.menu.add(resource);
+		this.menu.add(io);
+		this.io.add(in);
+		this.io.add(out);
 		this.resource.add(newDiagramm);
+		this.menu.add(search);
+		this.search.add(searchGeneral);
+		this.search.add(searchKeyword);
 
 		this.desktop.setBackground(Color.DARK_GRAY);
-		this.add(desktop);
 
-		listModel = new DefaultListModel();
+		in.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				InFrame iframe = new InFrame(mainFrameLink, purpose, scope);
+				addInternalFrame(iframe);
+
+			}
+		});
+
+		listModel = new DefaultListModel<Object>();
 		for (ContextCategory c : purpose.getTheCategory()) {
 			for (Pattern pat : c.getPatterns()) {
 				listModel.addElement(pat);
@@ -94,8 +120,7 @@ public class MainFrame extends JFrame {
 			}
 		}
 
-		final JList patternlist = new JList(listModel);
-
+		final JList<Object> patternlist = new JList<Object>(listModel);
 		ListSelectionModel selectList = patternlist.getSelectionModel();
 		selectList.addListSelectionListener(new ListSelectionListener() {
 
@@ -109,6 +134,64 @@ public class MainFrame extends JFrame {
 					patternPanel1.updateItem(p);
 				}
 
+			}
+		});
+
+		patternlist.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				check(e);
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				check(e);
+
+			}
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			public void check(MouseEvent e) {
+				if (e.isPopupTrigger()) { // if the event shows the menu
+					patternlist.setSelectedIndex(patternlist.locationToIndex(e
+							.getPoint())); // select the item
+					
+					System.out.println("ik doe het");
+					JMenuItem editItem = new JMenuItem("Edit pattern");
+					JPopupMenu pop = new JPopupMenu();
+					pop.add(editItem);
+					pop.show(patternlist, e.getX(), e.getY()); 
+					
+					editItem.addActionListener(new ActionListener() {
+						
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							
+							Pattern p = (Pattern) patternlist.getSelectedValue();
+							System.out.println("GESELECTEERD : " + p.getName());
+							
+							EditFrame ef = new EditFrame(p);
+							addInternalFrame(ef);
+							
+						}
+					});
+				
+				}
 			}
 		});
 
@@ -158,27 +241,6 @@ public class MainFrame extends JFrame {
 			}
 		});
 
-		listModel.addListDataListener(new ListDataListener() {
-
-			@Override
-			public void intervalRemoved(ListDataEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void intervalAdded(ListDataEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void contentsChanged(ListDataEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-
 		this.setVisible(true);
 	}
 
@@ -206,5 +268,7 @@ public class MainFrame extends JFrame {
 		this.revalidate();
 		this.repaint();
 	}
+	
+
 
 }
