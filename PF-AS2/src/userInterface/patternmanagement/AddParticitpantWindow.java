@@ -2,6 +2,7 @@ package userInterface.patternmanagement;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -12,6 +13,7 @@ import javax.swing.JTextField;
 
 import patternManagement.Consequence;
 import patternManagement.Force;
+import patternManagement.Participant;
 import patternManagement.Pattern;
 import contextManagement.ContextCategory;
 import contextManagement.ContextClassification;
@@ -48,11 +50,11 @@ public class AddParticitpantWindow extends JPanel {
 
 				Pattern p = (Pattern) combo.getSelectedItem();
 
-				p.addConsequence(new Consequence(name.getText(), description
-						.getText()));
+				p.addParticipant((new Participant(name.getText(), description
+						.getText())));
 
 				System.out.println("Zojuist toegevoegd: "
-						+ p.getTheConsequence().get(0).getName());
+						+ p.getTheParticipant().get(0).getName());
 
 			}
 		});
@@ -62,14 +64,22 @@ public class AddParticitpantWindow extends JPanel {
 	}
 
 	public void populateList() {
+ArrayList<Pattern> buffer = new ArrayList<Pattern>();
+		
+		combo.removeAllItems();
+		
 		for (ContextCategory c : p.getTheCategory()) {
 			for (Pattern p : c.getThePattern()) {
 				combo.addItem(p);
+				buffer.add(p);
 			}
 		}
 		for (ContextCategory c : s.getTheCategory()) {
 			for (Pattern p : c.getThePattern()) {
-				combo.addItem(p);
+				if(!buffer.contains(p)){
+					combo.addItem(p);	
+				}
+				
 			}
 		}
 	}

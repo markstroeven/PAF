@@ -1,20 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pattern>
 
-<classification>Scope</classification>
-<category>Class</category>
-<name>Model View View Model</name>
-<description>The model view controller is designed to seperate code accordingly within a model, view regulated by a controller</description>
+<pattern-classification>Purpose</pattern-classification>
+<pattern-category-scope>Class</pattern-category-scope>
+<pattern-category-purpose>Structural</pattern-category-purpose>
+<pattern-name>Model View View Model</pattern-name>
+<pattern-description>The model view controller is designed to seperate code accordingly within a model, view regulated by a controller</pattern-description>
 <diagram-path>C:\Users\Mark\Desktop\Repository\mvvm.png</diagram-path>
 
+<problem>
+<problem-name>A1 - CRITICAL PROBLEM: High coupling</problem-name>
+<probleem-description>This is a critical problem</probleem-description>
+</problem>
 
-<classification>Purpose</classification>
-<category>Structural</category>
-<name>Model View Controller pattern</name>
-<description>The model view controller is designed to seperate code accordingly within a model, view regulated by a controller</description>
-<diagram-path>C:\Users\Mark\Desktop\Repository\mvc.jpg</diagram-path>
+<problem>
+<problem-name>A2 - CRITICAL PROBLEM: low cohesion</problem-name>
+<probleem-description>This is a critical problem</probleem-description>
+</problem>
 
- 
- 
- </pattern>
+<problem>
+<problem-name>A3 - CRITICAL PROBLEM: do the thing!</problem-name>
+<probleem-description>This is a critical problem</probleem-description>
+</problem>
+
+<solution>
+<solution-name></solution-name>
+<solution-description></solution-description>
+</solution>
+
+<participant>
+<participant-name></participant-name>
+<participant-description></participant-description>
+</participant>
+
+<consequence>
+<consequence-name></consequence-name>
+<consequence-description></consequence-description>
+</consequence>
+
+<force>
+<force-name></force-name>
+<force-description></force-description>
+</force>
+
+</pattern>
+
+
 

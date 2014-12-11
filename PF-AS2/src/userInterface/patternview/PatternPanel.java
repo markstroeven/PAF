@@ -14,7 +14,10 @@ public class PatternPanel extends JPanel {
 	private DiagramPanel p2 = new DiagramPanel();
 	private ProblemPanel p3 = new ProblemPanel();
 	private ConesequencePanel p4 = new ConesequencePanel();
-
+	private SolutionPanel p5 = new SolutionPanel();
+	private ParticipantPanel p6 = new ParticipantPanel();
+	
+	
 	public PatternPanel() {
 
 		this.setVisible(true);
@@ -23,9 +26,9 @@ public class PatternPanel extends JPanel {
 		this.jtp.add("General pattern information", p1);
 		this.jtp.add("Problems", p3);
 		this.jtp.add("Consequences", p4);
-		this.jtp.add("Solutions", new JPanel());
+		this.jtp.add("Solutions", p5);
 		this.jtp.add("Forces", new JPanel());
-		this.jtp.add("Participants", new JPanel());
+		this.jtp.add("Participants", p6);
 		this.jtp.add("Pattern diagram", p2);
 
 	}
@@ -39,10 +42,12 @@ public class PatternPanel extends JPanel {
 		}
 		}
 		catch(Exception e){
-			System.out.println("Ow nee geen diagram!");
+	
 		}
 		p3.updateItem(p);
 		p4.updateItem(p);
+		p5.updateItem(p);
+		p6.updateItem(p);
 		
 		
 		

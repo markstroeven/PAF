@@ -45,4 +45,8 @@ public class Participant {
 		this.method = method;
 	}
 	
+	public String toString(){
+		return name;
+	}
+	
 }

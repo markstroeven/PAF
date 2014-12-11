@@ -2,6 +2,7 @@ package userInterface.patternmanagement;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -10,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import patternManagement.Consequence;
 import patternManagement.Pattern;
 import patternManagement.Solution;
 import contextManagement.ContextCategory;
@@ -62,16 +62,23 @@ public class AddSolutionWindow extends JPanel {
 	}
 
 	public void populateList() {
+ArrayList<Pattern> buffer = new ArrayList<Pattern>();
+		
+		combo.removeAllItems();
+		
 		for (ContextCategory c : p.getTheCategory()) {
 			for (Pattern p : c.getThePattern()) {
 				combo.addItem(p);
+				buffer.add(p);
 			}
 		}
 		for (ContextCategory c : s.getTheCategory()) {
 			for (Pattern p : c.getThePattern()) {
-				combo.addItem(p);
+				if(!buffer.contains(p)){
+					combo.addItem(p);	
+				}
+				
 			}
 		}
 	}
-
 }

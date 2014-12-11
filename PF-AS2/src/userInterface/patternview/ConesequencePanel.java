@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -17,6 +15,10 @@ import patternManagement.Pattern;
 
 public class ConesequencePanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1500272645459321267L;
 	private JLabel name, descript;
 	private JComboBox<Consequence> consequenceCombo = new JComboBox<Consequence>();
 
@@ -57,6 +59,8 @@ public class ConesequencePanel extends JPanel {
 	}
 	
 	public void populateList(Pattern p){
+		
+		consequenceCombo.removeAllItems();
 		
 		for(Consequence c : p.getTheConsequence()){
 			consequenceCombo.addItem(c);

@@ -105,6 +105,9 @@ public class AddPatternWindow extends JPanel {
 	}
 
 	public void populateList() {
+		purposeCombo.removeAllItems();
+		scopeCombo.removeAllItems();
+		
 		for (ContextCategory c : p.getTheCategory()) {
 			purposeCombo.addItem(c);
 		}
