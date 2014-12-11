@@ -31,7 +31,7 @@ public class EditFrame extends JInternalFrame {
 		
 		this.jtp.add("Edit pattern", epf);
 		this.jtp.add("Edit Problem", eprobf);
-		this.jtp.add("Edit Problem", esolf);
+		this.jtp.add("Edit Solution", esolf);
 	
 		
 		this.add(container);

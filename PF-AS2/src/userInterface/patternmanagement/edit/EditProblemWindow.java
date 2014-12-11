@@ -26,8 +26,7 @@ public class EditProblemWindow extends JPanel {
 	public EditProblemWindow(final Pattern p) {
 
 		final JComboBox<Problem> combo = new JComboBox<Problem>();
-		
-		
+
 		for (Problem prob : p.getTheProblem()) {
 
 			combo.addItem(prob);
@@ -50,21 +49,21 @@ public class EditProblemWindow extends JPanel {
 		JButton submit = new JButton("Submit change");
 		this.add(submit);
 		this.setVisible(true);
-		
+
 		submit.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				problem.setName(name.getText());
 				problem.setDescription((description.getText()));
-				
+
 			}
 		});
 
-		combo.addPropertyChangeListener(new PropertyChangeListener() {
+		combo.addActionListener(new ActionListener() {
 
 			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
+			public void actionPerformed(ActionEvent e) {
 				Problem p = (Problem) combo.getSelectedItem();
 				problem = p;
 
@@ -72,9 +71,10 @@ public class EditProblemWindow extends JPanel {
 					name.setText(p.getName());
 					description.setText(p.getDescription());
 				}
+
 			}
 		});
-		;
+
 	}
 
 }

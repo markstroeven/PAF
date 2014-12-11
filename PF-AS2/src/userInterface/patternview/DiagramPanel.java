@@ -8,14 +8,12 @@ import javax.swing.JPanel;
 
 import patternManagement.Pattern;
 
-public class DiagramPanel extends JPanel{
-	
+public class DiagramPanel extends JPanel {
+
 	private Image toSHow;
-	
-	public DiagramPanel(){
-		
-		
-		
+
+	public DiagramPanel() {
+
 	}
 
 	public Image getToSHow() {
@@ -25,13 +23,14 @@ public class DiagramPanel extends JPanel{
 	public void setToSHow(Image toSHow) {
 		this.toSHow = toSHow;
 	}
-	
+
 	public void updateItem(Pattern p) {
 		this.removeAll();
 		toSHow = p.getTheDiagram().getImage();
-		this.add(new JLabel(new ImageIcon(toSHow)));
+		if (toSHow != null) {
+			this.add(new JLabel(new ImageIcon(toSHow)));
+		}
+
 	}
-	
-	
 
 }

@@ -16,6 +16,7 @@ public class Pattern {
 	private Diagram theDiagram;
 	private Force force;
 	private PatternObserver observer;
+	private List<String> patternLinks = new ArrayList<String>();
 
 	public Pattern(Force fc, String nm, String d, PatternObserver pob) {
 		setForce(fc);
@@ -136,6 +137,14 @@ public class Pattern {
 	
 	public void doUpdate(){
 		observer.alertMembers();
+	}
+
+	public List<String> getPatternLinks() {
+		return patternLinks;
+	}
+
+	public void setPatternLinks(List<String> patternLinks) {
+		this.patternLinks = patternLinks;
 	}
 	
 

@@ -4,7 +4,8 @@ import java.util.List;
 
 
 public abstract class ContextClassification {
-	private String name, description;
+	protected String name;
+	private String description;
 	private List<ContextCategory> theCategory = new ArrayList<ContextCategory>();
 	
 	ContextClassification(String nm, String d){

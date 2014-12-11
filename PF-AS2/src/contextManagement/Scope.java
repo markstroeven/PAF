@@ -11,4 +11,8 @@ public class Scope extends ContextClassification{
 	public void addContextCategory(ContextCategory c){
 		super.getTheCategory().add(c);
 	}
+	
+	public String getName(){
+		return super.name;
+	}
 }

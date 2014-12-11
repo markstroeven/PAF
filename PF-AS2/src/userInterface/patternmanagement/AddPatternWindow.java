@@ -20,7 +20,8 @@ import contextManagement.ContextClassification;
 
 public class AddPatternWindow extends JPanel {
 
-	final JComboBox<ContextCategory> combo = new JComboBox<ContextCategory>();
+	final JComboBox<ContextCategory> scopeCombo = new JComboBox<ContextCategory>();
+	final JComboBox<ContextCategory> purposeCombo = new JComboBox<ContextCategory>();
 	final ContextClassification p, s;
 	private MainFrame frameLink;
 
@@ -39,8 +40,10 @@ public class AddPatternWindow extends JPanel {
 		this.add(name = new JTextField(22));
 		this.add(new JLabel("The description of the pattern"));
 		this.add(description = new JTextField(22));
-		this.add(new JLabel("The category of the pattern"));
-		this.add(combo);
+		this.add(new JLabel("The scope category of the pattern"));
+		this.add(scopeCombo);
+		this.add(new JLabel("The purpose category of the pattern"));
+		this.add(purposeCombo);
 		JButton submit;
 		this.add(submit = new JButton("Create new Pattern"));
 		submit.addActionListener(new ActionListener() {
@@ -64,13 +67,10 @@ public class AddPatternWindow extends JPanel {
 									"ERROR", JOptionPane.ERROR_MESSAGE);
 
 				}
-
-				ContextCategory selected = (ContextCategory) combo
+				ContextCategory selected = (ContextCategory) scopeCombo
 						.getSelectedItem();
-
-				Pattern p = selected.searchPattern(name.getText());
-
-				if (p != null) {
+				Pattern tester = selected.searchPattern(name.getText());
+				if (tester != null) {
 					JOptionPane
 							.showMessageDialog(
 									getRootPane(),
@@ -78,9 +78,22 @@ public class AddPatternWindow extends JPanel {
 									"ERROR", JOptionPane.ERROR_MESSAGE);
 				} else {
 
-					selected.addPattern(new Pattern(new Force(),
-							name.getText(), description.getText(), new PatternObserver(frameLink)));
+					Pattern p = new Pattern(new Force(), name.getText(),
+							description.getText(), new PatternObserver(
+									frameLink));
 					
+					ContextCategory selected2 = (ContextCategory) purposeCombo.getSelectedItem();
+					
+					selected.addPattern(p);
+					selected2.addPattern(p);
+					
+					ContextCategory temp1 = (ContextCategory)scopeCombo.getSelectedItem();
+					String scopeString = temp1.getName();
+					ContextCategory temp2 = (ContextCategory)purposeCombo.getSelectedItem();
+					String purposeString = temp2.getName();
+					
+					p.getPatternLinks().add(scopeString);
+					p.getPatternLinks().add(purposeString);
 
 				}
 
@@ -93,10 +106,10 @@ public class AddPatternWindow extends JPanel {
 
 	public void populateList() {
 		for (ContextCategory c : p.getTheCategory()) {
-			combo.addItem(c);
+			purposeCombo.addItem(c);
 		}
 		for (ContextCategory c : s.getTheCategory()) {
-			combo.addItem(c);
+			scopeCombo.addItem(c);
 		}
 	}
 

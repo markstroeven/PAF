@@ -1,5 +1,6 @@
 package userInterface.patternview;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -19,11 +20,14 @@ public class GPIPanel extends JPanel {
 		this.setVisible(true);
 		this.setLayout(new GridLayout(20, 1));
 		this.add(new JLabel("Pattern name:"));
-		this.add(name = new JLabel("DATA HIER"));
+		this.add(name = new JLabel(""));
+		name.setForeground(Color.RED);
 		this.add(new JLabel("Pattern description:"));
-		this.add(description = new JTextArea("DATA HIER"));
+		this.add(description = new JTextArea(""));
+		description.setForeground(Color.RED);
 		this.add(new JLabel("Pattern keywords:"));
-		this.add(keywords = new JLabel("DATA HIER"));
+		this.add(keywords = new JLabel(""));
+		keywords.setForeground(Color.RED);
 
 		description.setPreferredSize(new Dimension(200, 200));
 	}

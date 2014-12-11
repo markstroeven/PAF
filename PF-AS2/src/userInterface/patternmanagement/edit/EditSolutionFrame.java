@@ -48,22 +48,21 @@ public class EditSolutionFrame extends JPanel {
 		JButton submit = new JButton("Submit change");
 		this.add(submit);
 		this.setVisible(true);
-		
-		
+
 		submit.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				solution.setName(name.getText());
 				solution.setDescription((description.getText()));
-				
+
 			}
 		});
 
-		combo.addPropertyChangeListener(new PropertyChangeListener() {
+		combo.addActionListener(new ActionListener() {
 
 			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
+			public void actionPerformed(ActionEvent e) {
 				Solution s = (Solution) combo.getSelectedItem();
 				solution = s;
 

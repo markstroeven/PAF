@@ -1,5 +1,6 @@
 package userInterface;
 
+import finder.CategorySearcherFrame;
 import ioManagement.InFrame;
 
 import java.awt.BorderLayout;
@@ -67,6 +68,8 @@ public class MainFrame extends JFrame {
 	private MainFrame mainFrameLink = this;
 	private DefaultListModel<Object> listModel;
 	private PatternPanel patternPanel1;
+	
+	private JList<Object> patternlist;
 
 	public MainFrame(ContextClassification s, ContextClassification p) {
 
@@ -120,7 +123,7 @@ public class MainFrame extends JFrame {
 			}
 		}
 
-		final JList<Object> patternlist = new JList<Object>(listModel);
+		patternlist = new JList<Object>(listModel);
 		ListSelectionModel selectList = patternlist.getSelectionModel();
 		selectList.addListSelectionListener(new ListSelectionListener() {
 
@@ -194,6 +197,15 @@ public class MainFrame extends JFrame {
 				}
 			}
 		});
+		
+		searchGeneral.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CategorySearcherFrame frame = new CategorySearcherFrame(mainFrameLink, scope, purpose);
+				addInternalFrame(frame);
+			}
+		});
 
 		patternlist.setVisible(true);
 		patternlist.setSize(100, 90000);
@@ -256,17 +268,27 @@ public class MainFrame extends JFrame {
 		listModel.removeAllElements();
 		for (ContextCategory c : purpose.getTheCategory()) {
 			for (Pattern pat : c.getPatterns()) {
-				listModel.addElement(pat);
+				if(!listModel.contains(pat)){
+					listModel.addElement(pat);
+				}
 			}
 		}
 
 		for (ContextCategory c : scope.getTheCategory()) {
 			for (Pattern pat : c.getPatterns()) {
-				listModel.addElement(pat);
+				if(!listModel.contains(pat)){
+					listModel.addElement(pat);
+				}
 			}
 		}
 		this.revalidate();
 		this.repaint();
+	}
+	
+	public void setSelectedPattern(Pattern p){
+		patternPanel1.updateItem(p);
+		patternlist.setSelectedValue(p, true);
+		
 	}
 	
 
