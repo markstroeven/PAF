@@ -7,25 +7,29 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import patternManagement.Pattern;
 
 public class EditPatternFrame extends JPanel {
+	
+	private JScrollPane jcp;
 
 	public EditPatternFrame(final Pattern p) {
 
-		this.setLayout(new GridLayout(10, 1));
+		this.setLayout(new GridLayout(7, 1));
 		this.add(new JLabel("Please enter new pattern information"));
 		final JTextField name;
-		final JTextField description;
+		final JTextArea description = new JTextArea();
 		name = new JTextField(p.getName());
-		description = new JTextField(p.getDescription());
+		
 
 		this.add(new JLabel("Name:"));
 		this.add(name);
 		this.add(new JLabel("Description:"));
-		this.add(description);
+		this.add(jcp = new JScrollPane(description));
 
 		JButton submit = new JButton("Submit edit");
 		submit.addActionListener(new ActionListener() {

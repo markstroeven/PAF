@@ -1,8 +1,8 @@
-package contextManagement;
+package observer;
 
 import userInterface.MainFrame;
 
-public class ContextObserver {
+public class ContextObserver extends Observer{
 	
 	private MainFrame frameLink;
 	
@@ -10,7 +10,7 @@ public class ContextObserver {
 		frameLink = m ;
 	}
 	
-	public void alert(){
+	public void alertMembers(){
 		frameLink.updateAll();
 	}
 	

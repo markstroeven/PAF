@@ -7,6 +7,7 @@ public abstract class ContextClassification {
 	protected String name;
 	private String description;
 	private List<ContextCategory> theCategory = new ArrayList<ContextCategory>();
+	private AbstractFactory theFactory;
 	
 	ContextClassification(String nm, String d){
 		setName(nm);
@@ -47,6 +48,18 @@ public abstract class ContextClassification {
 			}
 		}
 		return searched;
+	}
+	
+	public String toString(){
+		return name;
+	}
+
+	public AbstractFactory getTheFactory() {
+		return theFactory;
+	}
+
+	public void setTheFactory(AbstractFactory theFactory) {
+		this.theFactory = theFactory;
 	}
 	
 }	

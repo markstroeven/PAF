@@ -1,24 +1,23 @@
 package ioManagement;
 
+import ioManagement.parser.XmlImportParser;
 import ioManagement.parser.XmlParser;
+import ioManagement.strategy.ImportStrategy;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.xml.parsers.ParserConfigurationException;
+import javax.swing.JOptionPane;
 
-import org.xml.sax.SAXException;
-
-import contextManagement.ContextClassification;
 import userInterface.MainFrame;
+import contextManagement.ContextClassification;
 
 public class InFrame extends JInternalFrame {
 
@@ -79,29 +78,35 @@ public class InFrame extends JInternalFrame {
 		});
 
 		submit.addActionListener(new ActionListener() {
-
+			
+	
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					XmlParser xgen = new XmlParser(path, frameLink);
+			
+				String strategyDefinition = (String) combo.getSelectedItem();
+				
+				if(strategyDefinition.equals("XML parser")){
+					try{
+					ImportStrategy xgen = new XmlImportParser(path, frameLink);
 					xgen.generatePatterns(purpose, scope);
 					self.dispose();
-
-				} catch (SAXException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ParserConfigurationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					}
+					catch(Exception ex){
+						
+					}
 				}
+				else if(strategyDefinition.equals("TXT parser")){
+					
+					JOptionPane
+					.showMessageDialog(
+							getRootPane(),
+							"This function is not yet implemented for TXT parsing, please use a xml parser",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
+					
+				}
+				
 			}
 		});
 	}
-
 }

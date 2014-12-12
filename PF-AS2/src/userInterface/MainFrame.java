@@ -2,6 +2,7 @@ package userInterface;
 
 import finder.CategorySearcherFrame;
 import ioManagement.InFrame;
+import ioManagement.OutFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -27,6 +29,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -46,17 +49,18 @@ public class MainFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 199816998292226292L;
 	// frame components
+
 	private JDesktopPane desktop = new JDesktopPane();
 	private JMenuBar menu = new JMenuBar();
 	private JMenu file = new JMenu("file");
 	private JMenuItem newManagementView = new JMenuItem("New management view");
-
 	private JMenu resource = new JMenu("External resources");
 	private JMenuItem newDiagramm = new JMenuItem("New diagram resource");
-
 	private JMenu io = new JMenu("Import / exort repository");
 	private JMenuItem in = new JMenuItem("Import repository");
 	private JMenuItem out = new JMenuItem("Export repository");
+	private JMenu catMan = new JMenu("Category Management");
+	private JMenuItem addCat = new JMenuItem("Add new category");
 
 	private JMenu search = new JMenu("Search pattern");
 	JMenuItem searchGeneral = new JMenuItem("Search pattern by category");
@@ -68,12 +72,12 @@ public class MainFrame extends JFrame {
 	private MainFrame mainFrameLink = this;
 	private DefaultListModel<Object> listModel;
 	private PatternPanel patternPanel1;
-	
+
 	private JList<Object> patternlist;
 
 	public MainFrame(ContextClassification s, ContextClassification p) {
 
-		super("Cindy");
+		super("Patternative");
 		purpose = p;
 		scope = s;
 
@@ -88,7 +92,6 @@ public class MainFrame extends JFrame {
 		this.setUndecorated(false);
 		this.setJMenuBar(menu);
 		this.menu.add(file);
-		this.file.setMnemonic('f');
 		this.menu.add(resource);
 		this.menu.add(io);
 		this.io.add(in);
@@ -97,6 +100,51 @@ public class MainFrame extends JFrame {
 		this.menu.add(search);
 		this.search.add(searchGeneral);
 		this.search.add(searchKeyword);
+		this.menu.add(catMan);
+		this.catMan.add(addCat);
+		
+		out.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				OutFrame out = new OutFrame(scope, purpose, mainFrameLink);
+				addInternalFrame(out);
+				
+			}
+		});
+
+		addCat.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				CategoryManagementFrame catManFrame = new CategoryManagementFrame(
+						scope, purpose, mainFrameLink);
+				addInternalFrame(catManFrame);
+			}
+		});
+
+		// COLOR ASSIGNMENT
+		menu.setBackground(Color.WHITE);
+		// IMAGEICON ASSIGNMENT
+		file.setIcon(new ImageIcon("resources\\interfaceimages\\file.png"));
+		io.setIcon(new ImageIcon("resources\\interfaceimages\\import.jpg"));
+		resource.setIcon(new ImageIcon(
+				"resources\\interfaceimages\\external.jpg"));
+		search.setIcon(new ImageIcon("resources\\interfaceimages\\search.jpg"));
+		catMan.setIcon(new ImageIcon("resources\\interfaceimages\\category.png"));
+		// SWING ACCELERATOR'S
+		KeyStroke ctrlKeystrokeNewManView = KeyStroke.getKeyStroke("control N");
+		newManagementView.setAccelerator(ctrlKeystrokeNewManView);
+
+		KeyStroke ctrlKeystrokeImport = KeyStroke.getKeyStroke("control I");
+		in.setAccelerator(ctrlKeystrokeImport);
+
+		KeyStroke ctrlKeystrokeNewDiagram = KeyStroke.getKeyStroke("control D");
+		newDiagramm.setAccelerator(ctrlKeystrokeNewDiagram);
+
+		KeyStroke ctrlKeystrokesearch = KeyStroke.getKeyStroke("control S");
+		searchGeneral.setAccelerator(ctrlKeystrokesearch);
 
 		this.desktop.setBackground(Color.DARK_GRAY);
 
@@ -153,16 +201,19 @@ public class MainFrame extends JFrame {
 				check(e);
 
 			}
+
 			@Override
 			public void mouseExited(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 
 			}
+
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 
 			}
+
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
@@ -173,36 +224,100 @@ public class MainFrame extends JFrame {
 				if (e.isPopupTrigger()) { // if the event shows the menu
 					patternlist.setSelectedIndex(patternlist.locationToIndex(e
 							.getPoint())); // select the item
-					
+
 					System.out.println("ik doe het");
 					JMenuItem editItem = new JMenuItem("Edit pattern");
+					editItem.setIcon(new ImageIcon(
+							"resources\\interfaceimages\\edit.jpg"));
+					JMenuItem delete = new JMenuItem("Delete this pattern");
 					JPopupMenu pop = new JPopupMenu();
 					pop.add(editItem);
-					pop.show(patternlist, e.getX(), e.getY()); 
-					
+					pop.add(delete);
+					pop.show(patternlist, e.getX(), e.getY());
+
 					editItem.addActionListener(new ActionListener() {
-						
+
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							
-							Pattern p = (Pattern) patternlist.getSelectedValue();
+
+							Pattern p = (Pattern) patternlist
+									.getSelectedValue();
 							System.out.println("GESELECTEERD : " + p.getName());
-							
+
 							EditFrame ef = new EditFrame(p);
 							addInternalFrame(ef);
-							
+
 						}
 					});
-				
+					delete.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							Pattern p = (Pattern) patternlist
+									.getSelectedValue();
+
+							Iterator<ContextCategory> contextIter = scope
+									.getTheCategory().iterator();
+							while (contextIter.hasNext()) {
+								ContextCategory current = contextIter.next();
+
+								Iterator<Pattern> patternIter = current
+										.getPatterns().iterator();
+								while (patternIter.hasNext()) {
+
+									Pattern currentPattern = patternIter.next();
+									if (current.getPatterns().contains(
+											currentPattern)) {
+
+										patternIter.remove();
+										System.out
+												.println("Ik heb hem verwijderd");
+										refreshList();
+										patternlist.revalidate();
+										patternlist.repaint();
+									}
+
+								}
+
+							}
+
+							contextIter = purpose.getTheCategory().iterator();
+							while (contextIter.hasNext()) {
+								ContextCategory current = contextIter.next();
+
+								Iterator<Pattern> patternIter = current
+										.getPatterns().iterator();
+								while (patternIter.hasNext()) {
+
+									Pattern currentPattern = patternIter.next();
+									if (current.getPatterns().contains(
+											currentPattern)) {
+
+										patternIter.remove();
+										System.out
+												.println("Ik heb hem verwijderd");
+										refreshList();
+										patternlist.revalidate();
+										patternlist.repaint();
+									}
+
+								}
+
+							}
+
+						}
+					});
+
 				}
 			}
 		});
-		
+
 		searchGeneral.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				CategorySearcherFrame frame = new CategorySearcherFrame(mainFrameLink, scope, purpose);
+				CategorySearcherFrame frame = new CategorySearcherFrame(
+						mainFrameLink, scope, purpose);
 				addInternalFrame(frame);
 			}
 		});
@@ -225,7 +340,7 @@ public class MainFrame extends JFrame {
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 				splitPane1, patternPanel1);
 		splitPane.setOneTouchExpandable(true);
-		splitPane.setDividerLocation(150);
+		splitPane.setDividerLocation(850);
 
 		this.add(splitPane);
 
@@ -268,15 +383,16 @@ public class MainFrame extends JFrame {
 		listModel.removeAllElements();
 		for (ContextCategory c : purpose.getTheCategory()) {
 			for (Pattern pat : c.getPatterns()) {
-				if(!listModel.contains(pat)){
+				if (!listModel.contains(pat)) {
 					listModel.addElement(pat);
+
 				}
 			}
 		}
 
 		for (ContextCategory c : scope.getTheCategory()) {
 			for (Pattern pat : c.getPatterns()) {
-				if(!listModel.contains(pat)){
+				if (!listModel.contains(pat)) {
 					listModel.addElement(pat);
 				}
 			}
@@ -284,13 +400,11 @@ public class MainFrame extends JFrame {
 		this.revalidate();
 		this.repaint();
 	}
-	
-	public void setSelectedPattern(Pattern p){
+
+	public void setSelectedPattern(Pattern p) {
 		patternPanel1.updateItem(p);
 		patternlist.setSelectedValue(p, true);
-		
-	}
-	
 
+	}
 
 }

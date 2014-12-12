@@ -1,8 +1,9 @@
 package contextManagement;
 
+import observer.ContextObserver;
 import userInterface.MainFrame;
 
-public class AbstractScopeFactory {
+public class AbstractScopeFactory implements AbstractFactory{
 	
 	private MainFrame frameLink;
 	
@@ -10,9 +11,10 @@ public class AbstractScopeFactory {
 		
 		frameLink = mf;
 	}
-	
-	public ContextCategory makeCategory(String name){
-		return new ContextCategory(name, new ContextObserver(frameLink));
+	@Override
+	public void createContextCategory(ContextClassification c, String nm) {
+		c.addContextCategory(new ContextCategory(nm, new ContextObserver(frameLink)));
+		
 	}
 
 }

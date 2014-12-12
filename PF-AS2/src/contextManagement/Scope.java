@@ -15,4 +15,6 @@ public class Scope extends ContextClassification{
 	public String getName(){
 		return super.name;
 	}
+	
+	
 }

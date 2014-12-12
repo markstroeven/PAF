@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -18,6 +19,10 @@ import contextManagement.ContextClassification;
 
 public class AddConsequenceWindow extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7178211912041120216L;
 	public JComboBox<Pattern> combo = new JComboBox<Pattern>();
 	ContextClassification p, s;
 
@@ -48,11 +53,21 @@ public class AddConsequenceWindow extends JPanel {
 
 				Pattern p = (Pattern) combo.getSelectedItem();
 
-				p.addConsequence(new Consequence(name.getText(), description
-						.getText()));
-
-				System.out.println("Zojuist toegevoegd: "
-						+ p.getTheConsequence().get(0).getName());
+				if (p == null) {
+					JOptionPane.showMessageDialog(getRootPane(),
+							"You did not select a valid pattern!", "ERROR",
+							JOptionPane.ERROR_MESSAGE);
+				} else if (name.getText().isEmpty()
+						|| description.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(getRootPane(),
+							"You did not enter a valid name or description",
+							"ERROR", JOptionPane.ERROR_MESSAGE);
+				} else {
+					p.addConsequence(new Consequence(name.getText(),
+							description.getText()));
+					System.out.println("Zojuist toegevoegd: "
+							+ p.getTheConsequence().get(0).getName());
+				}
 
 			}
 		});
@@ -62,11 +77,11 @@ public class AddConsequenceWindow extends JPanel {
 	}
 
 	public void populateList() {
-		
+
 		ArrayList<Pattern> buffer = new ArrayList<Pattern>();
-		
+
 		combo.removeAllItems();
-		
+
 		for (ContextCategory c : p.getTheCategory()) {
 			for (Pattern p : c.getThePattern()) {
 				combo.addItem(p);
@@ -75,10 +90,10 @@ public class AddConsequenceWindow extends JPanel {
 		}
 		for (ContextCategory c : s.getTheCategory()) {
 			for (Pattern p : c.getThePattern()) {
-				if(!buffer.contains(p)){
-					combo.addItem(p);	
+				if (!buffer.contains(p)) {
+					combo.addItem(p);
 				}
-				
+
 			}
 		}
 	}

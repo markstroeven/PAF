@@ -1,49 +1,74 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <pattern>
-
-<pattern-classification>Purpose</pattern-classification>
-<pattern-category-scope>Class</pattern-category-scope>
-<pattern-category-purpose>Structural</pattern-category-purpose>
-<pattern-name>Model View View Model</pattern-name>
-<pattern-description>The model view controller is designed to seperate code accordingly within a model, view regulated by a controller</pattern-description>
-<diagram-path>C:\Users\Mark\Desktop\Repository\mvvm.png</diagram-path>
-
-<problem>
-<problem-name>A1 - CRITICAL PROBLEM: High coupling</problem-name>
-<probleem-description>This is a critical problem</probleem-description>
-</problem>
-
-<problem>
-<problem-name>A2 - CRITICAL PROBLEM: low cohesion</problem-name>
-<probleem-description>This is a critical problem</probleem-description>
-</problem>
-
-<problem>
-<problem-name>A3 - CRITICAL PROBLEM: do the thing!</problem-name>
-<probleem-description>This is a critical problem</probleem-description>
-</problem>
-
-<solution>
-<solution-name></solution-name>
-<solution-description></solution-description>
-</solution>
-
-<participant>
-<participant-name></participant-name>
-<participant-description></participant-description>
-</participant>
-
-<consequence>
-<consequence-name></consequence-name>
-<consequence-description></consequence-description>
-</consequence>
-
-<force>
-<force-name></force-name>
-<force-description></force-description>
-</force>
-
+	<pattern-meta>
+		<meta-pattern-ammount>1</meta-pattern-ammount>
+		<meta-problem>3</meta-problem>
+		<meta-solution>2</meta-solution>
+		<meta-participant>4</meta-participant>
+		<meta-consequence>1</meta-consequence>
+	</pattern-meta>
+	<pattern-classification>Scope</pattern-classification>
+	<pattern-category-scope>Class</pattern-category-scope>
+	<pattern-category-purpose>Structural</pattern-category-purpose>
+	<pattern-name>Model View Controller Pattern</pattern-name>
+	<pattern-description>TModel–view–controller (MVC) is a software
+		architectural pattern for
+		implementing user interfaces. It divides a given software application into three
+		interconnected parts,
+		so as to separate internal representations of
+		information from the ways that information is presented to or accepted from the
+		user
+	</pattern-description>
+	<diagram-path>C:\Users\Mark\Desktop\Repository\mvc.jpg</diagram-path>
+	<problem>
+		<problem-name>A1 - CRITICAL PROBLEM: High coupling</problem-name>
+		<probleem-description>This is a critical problem
+		</probleem-description>
+	</problem>
+	<problem>
+		<problem-name>A2 - CRITICAL PROBLEM: low cohesion</problem-name>
+		<probleem-description>This is a critical problem
+		</probleem-description>
+	</problem>
+	<problem>
+		<problem-name>A3 - CRITICAL PROBLEM: do the thing!</problem-name>
+		<probleem-description>This is a critical problem
+		</probleem-description>
+	</problem>
+	<solution>
+		<solution-name>S1 - Irrelugar code cohesion</solution-name>
+		<solution-description>The MVC patterns aids you in position code
+			accordingly</solution-description>
+	</solution>
+	<solution>
+		<solution-name>S2 - Irrelugar code cohesion 2</solution-name>
+		<solution-description>The MVC patterns aids you in position code
+			accordingly v2</solution-description>
+	</solution>
+	<consequence>
+		<consequence-name>C1 - NESTED GUI</consequence-name>
+		<consequence-description>This pattern disallows use of nested GUI
+			classes</consequence-description>
+	</consequence>
+	<participant>
+		<participant-name>P1 - Model class</participant-name>
+		<participant-description>A model class represent the data stores in
+			the application e.g. data classes</participant-description>
+	</participant>
+	<participant>
+		<participant-name>P2 - View class</participant-name>
+		<participant-description>The view class represent the GUI elements
+			e.g. JSP / ASP</participant-description>
+	</participant>
+	<participant>
+		<participant-name>P3 - Controller class</participant-name>
+		<participant-description>The controller class represent the logic
+			layer of the application e.g. tasks / controllers
+		</participant-description>
+	</participant>
+	<participant>
+		<participant-name>P4 - External class</participant-name>
+		<participant-description>An external class represents a database for
+			example.</participant-description>
+	</participant>
 </pattern>
-
-
-

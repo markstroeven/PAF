@@ -1,6 +1,7 @@
 package patternManagement;
 
 import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,9 +114,12 @@ public class Pattern {
 		observer.alertMembers();
 	}
 
-	public void addDiagram(Image i) {
+	public void addDiagram(Image i, File imageFile) {
 
+		
+		String path = imageFile.getAbsolutePath();
 		Diagram d = new Diagram();
+		d.setFilePath(path);
 		d.setImage(i);
 		theDiagram = (d);
 		observer.alertMembers();

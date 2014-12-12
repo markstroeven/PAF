@@ -28,11 +28,18 @@ public class EditFrame extends JInternalFrame {
 		EditPatternFrame epf = new EditPatternFrame(p);
 		EditProblemWindow eprobf = new EditProblemWindow(p);
 		EditSolutionFrame esolf = new EditSolutionFrame(p);
+		EditForceFrame eforf = new EditForceFrame(p);
+		EditParticipantFrame epartf = new EditParticipantFrame(p);
+		EditConsequenceFrame econf = new EditConsequenceFrame(p);
 		
 		this.jtp.add("Edit pattern", epf);
 		this.jtp.add("Edit Problem", eprobf);
 		this.jtp.add("Edit Solution", esolf);
+		this.jtp.add("Edit Force", eforf);
+		this.jtp.add("Edit Participant", epartf);
+		this.jtp.add("Edit Consequence", econf);
 	
+		jtp.setPreferredSize(new Dimension(690,390));
 		
 		this.add(container);
 		this.repaint();

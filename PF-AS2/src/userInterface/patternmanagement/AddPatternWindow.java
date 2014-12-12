@@ -51,6 +51,18 @@ public class AddPatternWindow extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
+				ContextCategory selected = (ContextCategory) scopeCombo
+						.getSelectedItem();
+				Pattern tester = selected.searchPattern(name.getText());
+
+				if (tester != null) {
+					JOptionPane
+							.showMessageDialog(
+									getRootPane(),
+									"The pattern name you have entered already exists, please select a different name",
+									"ERROR", JOptionPane.ERROR_MESSAGE);
+				} else
+
 				if (name.getText().isEmpty()) {
 					JOptionPane
 							.showMessageDialog(
@@ -58,40 +70,32 @@ public class AddPatternWindow extends JPanel {
 									"The name for this pattern is empty! Please enter a name.",
 									"ERROR", JOptionPane.ERROR_MESSAGE);
 
-				}
-				if (description.getText().isEmpty()) {
+				} else if (description.getText().isEmpty()) {
 					JOptionPane
 							.showMessageDialog(
 									getRootPane(),
 									"The description for this pattern is empty! Please enter a description.",
 									"ERROR", JOptionPane.ERROR_MESSAGE);
 
-				}
-				ContextCategory selected = (ContextCategory) scopeCombo
-						.getSelectedItem();
-				Pattern tester = selected.searchPattern(name.getText());
-				if (tester != null) {
-					JOptionPane
-							.showMessageDialog(
-									getRootPane(),
-									"The pattern name you have entered already exists, please select a different name",
-									"ERROR", JOptionPane.ERROR_MESSAGE);
 				} else {
 
 					Pattern p = new Pattern(new Force(), name.getText(),
 							description.getText(), new PatternObserver(
 									frameLink));
-					
-					ContextCategory selected2 = (ContextCategory) purposeCombo.getSelectedItem();
-					
+
+					ContextCategory selected2 = (ContextCategory) purposeCombo
+							.getSelectedItem();
+
 					selected.addPattern(p);
 					selected2.addPattern(p);
-					
-					ContextCategory temp1 = (ContextCategory)scopeCombo.getSelectedItem();
+
+					ContextCategory temp1 = (ContextCategory) scopeCombo
+							.getSelectedItem();
 					String scopeString = temp1.getName();
-					ContextCategory temp2 = (ContextCategory)purposeCombo.getSelectedItem();
+					ContextCategory temp2 = (ContextCategory) purposeCombo
+							.getSelectedItem();
 					String purposeString = temp2.getName();
-					
+
 					p.getPatternLinks().add(scopeString);
 					p.getPatternLinks().add(purposeString);
 
@@ -107,7 +111,7 @@ public class AddPatternWindow extends JPanel {
 	public void populateList() {
 		purposeCombo.removeAllItems();
 		scopeCombo.removeAllItems();
-		
+
 		for (ContextCategory c : p.getTheCategory()) {
 			purposeCombo.addItem(c);
 		}

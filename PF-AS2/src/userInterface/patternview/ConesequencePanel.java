@@ -28,7 +28,7 @@ public class ConesequencePanel extends JPanel {
 		this.setLayout(new GridLayout(20, 1));
 		this.add(new JLabel("Select a consequence to view:"));
 		this.add(consequenceCombo);
-
+		
 		this.add(new JLabel("consequence name:"));
 		this.add(name = new JLabel(""));
 		name.setForeground(Color.RED);

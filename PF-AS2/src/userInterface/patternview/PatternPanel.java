@@ -16,6 +16,7 @@ public class PatternPanel extends JPanel {
 	private ConesequencePanel p4 = new ConesequencePanel();
 	private SolutionPanel p5 = new SolutionPanel();
 	private ParticipantPanel p6 = new ParticipantPanel();
+	private ForcePanel p7 = new ForcePanel();
 	
 	
 	public PatternPanel() {
@@ -27,7 +28,7 @@ public class PatternPanel extends JPanel {
 		this.jtp.add("Problems", p3);
 		this.jtp.add("Consequences", p4);
 		this.jtp.add("Solutions", p5);
-		this.jtp.add("Forces", new JPanel());
+		this.jtp.add("Forces", p7);
 		this.jtp.add("Participants", p6);
 		this.jtp.add("Pattern diagram", p2);
 
@@ -48,6 +49,7 @@ public class PatternPanel extends JPanel {
 		p4.updateItem(p);
 		p5.updateItem(p);
 		p6.updateItem(p);
+		p7.updateItem(p);
 		
 		
 		

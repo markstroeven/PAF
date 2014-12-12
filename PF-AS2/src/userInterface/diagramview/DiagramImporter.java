@@ -126,7 +126,7 @@ public class DiagramImporter extends JInternalFrame {
 
 		Pattern p = (Pattern) combo.getSelectedItem();
 		System.out.println("Selected -> " + p);
-		p.addDiagram(theCurrentImage);
+		p.addDiagram(theCurrentImage, imageFile);
 		
 	}
 }

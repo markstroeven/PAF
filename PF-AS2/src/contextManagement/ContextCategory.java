@@ -3,12 +3,14 @@ package contextManagement;
 import java.util.ArrayList;
 import java.util.List;
 
+import observer.ContextObserver;
 import patternManagement.Pattern;
 
 public class ContextCategory implements AbstractContextCategory {
 	private String name;
 	private List<Pattern> thePattern = new ArrayList<Pattern>();
 	private ContextObserver observer;
+
 
 	public Pattern searchPattern(String nm) {
 
@@ -56,6 +58,14 @@ public class ContextCategory implements AbstractContextCategory {
 
 	public void addPattern(Pattern p) {
 		thePattern.add(p);
-		observer.alert();
+		observer.alertMembers();
 	}
+	
+	public void removePattern(Pattern p){
+		thePattern.remove(p);
+		observer.alertMembers();
+	}
+
+
+
 }
